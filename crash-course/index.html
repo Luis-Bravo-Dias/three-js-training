@@ -8,7 +8,7 @@
 		</style>
 	</head>
 	<body>
-		<script src="js/three.js"></script>
+		<script src="js/threeold.js"></script>
         <script src="js/OrbitControls.js"></script>
 		<script>
 			var scene = new THREE.Scene( );
@@ -30,11 +30,24 @@
             controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 			// create the shape
-			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var geometry = new THREE.BoxGeometry( 2, 2, 2 );
+            var cubeMaterials =
+            [
+                //new THREE.MeshBasicMaterial({color: 0xFFFFFF, side: THREE.DoubleSide}),//rigth
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/Chainsaw.png'), side: THREE.DoubleSide}),//rigth
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/Copernicus.png'), side: THREE.DoubleSide}),//left
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/doc.png'), side: THREE.DoubleSide}),//top
+                //new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/doc.png'), side: THREE.BackSide}),//top
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/Grim.png'), side: THREE.DoubleSide}),//bottom
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/Kotaro.png'), side: THREE.DoubleSide}),//front
+                //new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/T-Shirt.png'), side: THREE.FrontSide})//back
+                new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('imgs/T-Shirt.png'), side: THREE.DoubleSide})//back
+            ];
 
-			// create a material, colour or image texture
-			var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true } );
-			var cube = new THREE.Mesh( geometry, material );
+			//create a material, colour or image texture
+			//var material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true } );
+			var material = new THREE.MeshFaceMaterial( cubeMaterials );
+            var cube = new THREE.Mesh( geometry, material );
 			scene.add( cube );
 
 			camera.position.z = 3;
